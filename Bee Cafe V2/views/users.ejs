@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bee Cafe</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+  </head>
+  <body>
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <h1 class="display-4">Welcome to <strong>Bee Cafe</strong></h1>
+        <p class="lead">Choose and taste at your place</p>
+      </div>
+      <br /><br /><br />
+      <center>
+          <a href="/admin" class="btn btn-primary">Back to Dashboard</a><br><br>
+        <div style="width: 70%;">
+            <div class="card-deck">
+              
+                <div class="card">
+                  <% users.forEach(ele => {%>
+                  <img src="../public/images/<%= ele.file %>" class="card-img-top" alt="...">
+                  <div class="card-body">
+                    <h5 class="card-title"><%= ele.name %></h5>
+                    <p class="card-text"><%= ele.email %></p>
+                  </div>
+                  <div class="card-footer">
+                    <small class="text-muted">Price: <%= ele.phone %></small>
+                  </div>
+                  <%})%>
+                </div>
+              </div>
+              
+        </div>
+        
+      </center>
+    </div>
+  </body>
+</html>
+  

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bee Cafe</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+  </head>
+  <body>
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <h1 class="display-4">Welcome to <strong>Bee Cafe</strong></h1>
+        <p class="lead">Choose and taste at your place</p>
+      </div>
+      <br /><br /><br />
+      <!-- <center> -->
+          <div style="margin-left: 170px;">
+            <h3 style="color: darkblue;">Updated User Details</h3>
+            <strong>Full Name</strong><p><%= user.name %></p>
+            <strong>Email</strong><p><%= user.email %></p>
+            <strong>Number</strong><p><%= user.number %></p>
+            <strong>Address 1</strong><p><%= user.addressOne %></p>
+            <strong>Address 2</strong><p><%= user.addressTwo %></p>
+            <strong>City</strong><p><%= user.city %></p>
+            <strong>Zip Code</strong><p><%= user.zip %></p>
+            <a href="/login" class="btn btn-primary">Back to Home</a>
+          </div>
+        
+      <!-- </center> -->
+    </div>
+  </body>
+</html>
