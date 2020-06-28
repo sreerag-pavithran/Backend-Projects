@@ -35,22 +35,22 @@ router.get('/logout', (req, res, next)=>{
 });
 
 // GET Profile Page
-router.get('/profile', userController.profile);
+router.get('/profile',verify, userController.profile);
 
 // POST Profile Page
-router.post('/profile', verify, userController.upadteProfile);
+router.post('/profile', userController.upadteProfile);
 
 // GET Address Page
 router.get('/address', verify, userController.address);
 
 // POST Address Page
-router.post('/address', verify, userController.upadteProfile);
+router.post('/address', userController.upadteProfile);
 
 // POST Add to cart
 router.post('/add', itemController.addToCart);
 
 // GET View Cart
-router.get('/cart', itemController.viewCart);
+router.get('/cart', verify,  itemController.viewCart);
 
 // Get Delete Cart Items
 router.get('/delete', itemController.deleteCart);

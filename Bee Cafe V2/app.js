@@ -6,7 +6,6 @@ var logger = require('morgan');
 let mondoDB = require('./config/db');
 require('dotenv');
 const jwt_decode = require('jwt-decode');
-const User = require('../Bee Cafe/models/userModel');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
