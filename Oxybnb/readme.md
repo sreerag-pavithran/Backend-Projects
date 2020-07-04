@@ -13,7 +13,7 @@
 This Project is developed by,
 
 
-**Sreerag Pavithran** - [Github](https://github.com/sreerag-pavithran-au7 "Github")
+**Sreerag Pavithran** - [Github](https://github.com/sreerag-pavithran-au7 "Github")  [Portfolio](https://iamsreerag.xyz "portfolio")
 
 **Saksham Gupta** - [Github](https://github.com/saksham-gupta-au7 "Github")
 
