@@ -1,7 +1,8 @@
 const mongoose  = require('mongoose');
+require('dotenv').config();
 
 mongoose
-    .connect('mongodb+srv://iamsreerag:admin123@cluster0-b6jtb.mongodb.net/beecafe',{
+    .connect(process.env.DB ,{
         useNewUrlParser: true,
         useUnifiedTopology: true
     })

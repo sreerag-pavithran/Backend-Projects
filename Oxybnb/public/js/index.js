@@ -11,11 +11,12 @@ document.querySelector('.form--login').addEventListener('submit', (e) => {
 	login(email, password);
 });
 
-document.querySelector('.signform').addEventListener('submit', (e) => {
-	e.preventDefault();
-	const email = document.getElementById('email').value;
-	const password = document.getElementById('password').value;
-	const username = document.getElementById('username').value;
-	const confirmPassword = document.getElementById('confirmPassword').value;
-	signup(email, password, username, confirmPassword);
-});
+// document.querySelector('.signform').addEventListener('submit', (e) => {
+// 	e.preventDefault();
+// 	const email = document.getElementById('email').value;
+// 	const password = document.getElementById('password').value;
+// 	const username = document.getElementById('username').value;
+// 	const confirmPassword = document.getElementById('confirmPassword').value;
+// 	console.log(email, password, username, confirmPassword);
+// 	signup(email, password, username, confirmPassword);
+// });

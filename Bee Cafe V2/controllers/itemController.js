@@ -3,6 +3,7 @@ const User = require('../models/userModel');
 const bcrypt = require('bcrypt');
 var Cart = require('../models/cartModel');
 let jwt_decode = require('jwt-decode')
+const Wish = require('../models/wishModel');
 
 let admin = (req, res, next)=>{
     let email = req.body.email;
@@ -127,6 +128,27 @@ let deleteCart = async(req, res, next)=>{
     res.redirect('/cart');
 }
 
+let addToWish = async(req, res, next)=>{
+    const token = req.cookies['auth-token'];
+    let decoded = jwt_decode(token);
+    let user = await User.find({ _id: decoded._id });
+    let userid = decoded._id;
+    let id = req.query.id;
+    let data;
+    let findData = await Cart.find({ userid: userid, prdtid: id })
+    if(!findData){
+        data = new Wish({
+          prdtid: id,
+          userid: userid
+        })
+    }
+    try {
+        await data.save();
+    } catch (error) {
+        await res.redierct('/home')
+    }
+}
+
 module.exports = {
-    admin, addItem, manage, users, products, addToCart, viewCart, deleteCart
+    admin, addItem, manage, users, products, addToCart, viewCart, deleteCart, addToWish
 }

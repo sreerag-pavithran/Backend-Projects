@@ -9,6 +9,7 @@ html
         link(rel='shortcut icon' type='image/png' href='/img/favicon.png')
         link(rel='stylesheet' href='https://fonts.googleapis.com/css?family=Lato:300,300i,700')
         title Air | #{title}
+        link(rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous")
         script(src='https://api.mapbox.com/mapbox-gl-js/v1.11.0/mapbox-gl.js')
         link(href='https://api.mapbox.com/mapbox-gl-js/v1.11.0/mapbox-gl.css' rel='stylesheet')
         script(src="https://js.stripe.com/v3/")
@@ -55,7 +56,31 @@ html
                             br
                             span 1 King bed
                 .singleOverview_details_third
-                    p will implement amenities over here
+                    h4 Amenities
+                    .utilmain
+                        ul
+                            li 
+                                img.utils(src="/img/utilities/wifi.png", alt="")
+                                span WIFI
+                            li 
+                                img.utils(src="/img/utilities/security.png", alt="")
+                                span Security
+                            li 
+                                img.utils(src="/img/utilities/tag.png", alt="")
+                                span Tag
+                            li 
+                                img.utils(src="/img/utilities/utility.png", alt="")
+                                span Utility
+                        ul
+                            li
+                                img.utils(src="/img/utilities/room-clean.png", alt="")
+                                span Room Clean
+                            li
+                                img.utils(src="/img/utilities/luggage-handler.png", alt="")
+                                span Luggage Handler
+                            li 
+                                img.utils(src="/img/utilities/car-parking.png", alt="")
+                                span Car Parking
                 .singleOverview_details_fourth
                     - const reviewing = `❤️ ${data.ratingsAverage} (${data.ratingsQuantity} reviews)`
                     h3= s= reviewing
@@ -104,19 +129,24 @@ html
                                 .form__grouppayment1
                                     .form__grouppayment1a.form-rightborder
                                         label(for='checkin') CHECK-IN
-                                        input#checkin.form__input(type='date', placeholder='Add date')
+                                        input.form__input(type='date', id='checkin',max='',placeholder='Add date')
                                     .form__grouppayment1a
                                         label(for='checkout') CHECK-OUT
-                                        input#checkin.form__input(type='date', placeholder='Add date')
+                                        input.form__input(type='date', id='checkout',min='',placeholder='Add date')
                                 .form__grouppayment1b
                                     label(for='guests') Guests
-                                    input#password.form__input(type='number', placeholder='guest')
+                                    input#guest.form__input(type='number', placeholder='guest')
+                                p.total_payment_section
+                                    p.total_payment= data.price
+                                    p.total_paymentb INR
                                 .form__grouppayment.form-payment_button
                                     if user
                                         button#book-tour(data-hotel-id = data._id) Check availability
                                     else
                                         a(href="/login") Login
+        h4 Location
         .singleOverview_map
+            
             #map(data-livelocation=`${JSON.stringify(data.livelocation)}`)
             img(src="", alt="")
 
@@ -125,4 +155,4 @@ html
         script(src='/js/mapbox.js')
         script(src='/js/logout.js')
         script(src='/js/stripe.js')
-
+        script(src='/js/date2.js')

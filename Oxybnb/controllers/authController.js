@@ -7,22 +7,22 @@ const Email = require('../utils/email');
 const crypto = require('crypto');
 
 exports.signup = catchAsync(async (req, res) => {
-	console.log('From auth' + req.body);
+	// console.log('From auth' + req.body);
 	const newUser = await user.create(req.body);
 
-	// URL will be a http://localhost/me/personal
-	// const url = `${req.protocol}://${req.get('host')}/me/personal`;
+	const url = `${req.protocol}://${req.get('host')}/me/personal`;
 	// console.log(url);
-	// await new Email(newUser, url).sendWelcome();
+	await new Email(newUser, url).sendWelcome();
 
 	id = newUser._id;
 
+	// Sending  Token as Cookie
 	const token = jwt.sign({ id }, 'abcdefebgudjnwksjcscjscsdjkcnjdc');
 	const cookieOptions = {
 		expires: new Date(Date.now() + 1000 * 24 * 60 * 60 * 1000),
 		httpOnly: true
 	};
-	console.log(token);
+	// console.log(token);
 	res.cookie('jwt', token, cookieOptions);
 
 	res.status(201).json({
@@ -37,7 +37,11 @@ exports.login = catchAsync(async (req, res) => {
 	const password = req.body.password;
 	// console.log(req.body)
 	// console.log(username, password)
+
+	// 1) Check if email and password exist
 	if (!email || !password) throw new err('Please provide username or password', 404);
+
+	// 2) Check if user exists && password is correct
 	const singleUser = await user.findOne({ email: email });
 	// console.log(singleUser)
 	const correct = await bcrypt.compare(password, singleUser.password);
@@ -45,8 +49,10 @@ exports.login = catchAsync(async (req, res) => {
 	if (!singleUser || !correct) throw new err('Please provide valid username or password', 404);
 
 	id = singleUser._id;
+
+	// 3) If everything ok, send token to client
 	const token = jwt.sign({ id }, 'abcdefebgudjnwksjcscjscsdjkcnjdc');
-	console.log(token);
+	// console.log(token);
 	const cookieOptions = {
 		expires: new Date(Date.now() + 1000 * 24 * 60 * 60 * 1000),
 		httpOnly: true
@@ -60,21 +66,21 @@ exports.login = catchAsync(async (req, res) => {
 
 exports.protect = catchAsync(async (req, res, next) => {
 	// 1) Getting token and check of it's there
-	console.log('Welcome to protected route');
+	// console.log('Welcome to protected route');
 	let token;
 	if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
 		token = req.headers.authorization.split(' ')[1];
 	} else if (req.cookies.jwt) {
 		token = req.cookies.jwt;
 	}
-	console.log(token);
+	// console.log(token);
 	if (!token) {
 		return next(new AppError('You are not logged in! Please log in to get access.', 401));
 	}
 
 	// 2) Verification token
 	const decoded = await jwt.verify(token, 'abcdefebgudjnwksjcscjscsdjkcnjdc');
-	console.log(decoded);
+	// console.log(decoded);
 	// 3) Check if user still exists
 	const currentUser = await user.findById(decoded.id);
 	if (!currentUser) {
@@ -87,14 +93,15 @@ exports.protect = catchAsync(async (req, res, next) => {
 	// // 	new AppError('User recently changed password! Please log in again.', 401)
 	// //   );
 	// }
-	console.log('giving current user from protected user');
-	console.log(currentUser);
+	// console.log('giving current user from protected user');
+	// console.log(currentUser);
 	// GRANT ACCESS TO PROTECTED ROUTE
 	req.user = currentUser;
 	req.locals.user = currentUser;
 	next();
 });
 
+// Only for rendered pages, no errors!
 exports.isLoggedIn = async (req, res, next) => {
 	try {
 		if (req.cookies.jwt) {
@@ -106,7 +113,7 @@ exports.isLoggedIn = async (req, res, next) => {
 			if (!currentUser) {
 				return next();
 			}
-			console.log(currentUser);
+			// console.log(currentUser);
 
 			// 3) Check if user changed password after the token was issued
 			// if (currentUser.changedPasswordAfter(decoded.iat)) {
@@ -134,7 +141,7 @@ exports.logout = (req, res) => {
 
 exports.updatePassword = catchAsync(async (req, res) => {
 	// 1) Get user from collection
-	console.log('Hi from updatepassword controller');
+	// console.log('Hi from updatepassword controller');
 	// console.log(req.body);
 	const User = await user.findById(req.user.id).select('+confirmPassword');
 
@@ -162,7 +169,7 @@ exports.updatePassword = catchAsync(async (req, res) => {
 		httpOnly: true
 	};
 	res.cookie('jwt', token, cookieOptions);
-	console.log('SENDING COOKIESSSSSSsss');
+	// console.log('SENDING COOKIESSSSSSsss');
 	res.status(200).json({
 		status: 'success',
 		token: token
@@ -223,7 +230,7 @@ exports.resetPassword = async (req, res, next) => {
 	// createSendToken(User, 200, res);
 	id = User._id;
 	const token = jwt.sign({ id }, 'abcdefebgudjnwksjcscjscsdjkcnjdc');
-	console.log(token);
+	// console.log(token);
 	const cookieOptions = {
 		expires: new Date(Date.now() + 1000 * 24 * 60 * 60 * 1000),
 		httpOnly: true
