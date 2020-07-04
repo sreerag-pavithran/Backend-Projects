@@ -12,8 +12,16 @@
 
 This Project is developed by,
 **Saksham Gupta** - [Github](https://github.com/saksham-gupta-au7 "Github")
+
 **Sreerag Pavithran** - [Github](https://github.com/sreerag-pavithran-au7 "Github")
 
 ---
+
+**Home Page**
+![Screenshot 1](https://github.com/sreerag-pavithran-au7/Backend-Projects/blob/master/Oxybnb/screenshots/Oxybnb1.png "Screenshot 1")
+
+
+**Hotel View Page**
+![Screenshot 2](https://github.com/sreerag-pavithran-au7/Backend-Projects/blob/master/Oxybnb/screenshots/Oxybnb2.png "Screenshot 2")
 
 Live Demo: [Click Here](http://still-anchorage-78289.herokuapp.com/ "Click Here")
