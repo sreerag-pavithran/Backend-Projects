@@ -11,3 +11,6 @@ Admin can login and control user data and see the order details. Admin are able 
 - MongoDB
 
 Developed by [Sreerag Pavithran](https://iamsreerag.xyz/ "Sreerag Pavithran")
+
+**Signup Page**
+![Screenshot 1](https://github.com/sreerag-pavithran-au7/Backend-Projects/blob/master/Bee%20Cafe%20V2/screenshots/02.pngg "Screenshot 1")
